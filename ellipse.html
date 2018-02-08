@@ -1,0 +1,18 @@
+<canvas id='c'></canvas>
+<script>
+var c  = document.getElementById("c").getContext("2d")
+ry = 50
+blink()
+
+function blink(){
+    c.clearRect(0,0,300,150)
+    c.beginPath();
+    c.ellipse(100, 75, 75, ry, 0, 0, 2 * Math.PI);
+    c.stroke();
+    if (ry == 50) eye = "close"
+    if (ry == 0) eye = "open"
+    if (eye == "close") ry--
+    if (eye == "open") ry++
+    requestAnimationFrame(blink)
+}
+</script>
