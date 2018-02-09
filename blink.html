@@ -1,0 +1,62 @@
+<canvas id='c'></canvas>
+<script>
+var c  = document.getElementById("c").getContext("2d")
+
+ry = 50
+topbottomlid = "bottom"
+openclose = "open"
+
+draw()
+function draw(){
+    c.clearRect(0,0,300,150)
+    
+    //eye
+    c.beginPath()
+    c.ellipse(150,75,100,50,0,Math.PI,0)
+    c.ellipse(150,75,100,50,0,0,Math.PI)
+    c.stroke()
+    
+    c.beginPath()
+    c.fillStyle = 'blue'
+    c.arc(150,75,25,0,2 * Math.PI)
+    c.fill();
+
+    c.beginPath()
+    c.fillStyle = 'black'
+    c.arc(150,75,12,0,2 * Math.PI)
+    c.fill();
+    
+    //lid
+    c.beginPath()
+    c.fillStyle = 'white'
+    if (topbottomlid == "bottom"){
+        c.ellipse(150,75,100,50,0,Math.PI,0)
+        c.ellipse(150,75,100,ry,0,0,Math.PI)
+    }
+    if (topbottomlid == "top"){
+        c.ellipse(150,75,100,50,0,Math.PI,0)
+        c.ellipse(150,75,100,ry,0,0,Math.PI,true)
+    }
+    
+    c.fill()
+    c.stroke()
+    
+    if (ry == 50)   topbottomlid = "bottom"
+    
+    if (openclose == "open"){
+        if (topbottomlid == "bottom")   ry = ry - 1
+        if (ry == 0)                    topbottomlid = "top"
+        if (topbottomlid == "top")      ry = ry + 1
+        if (ry == 50)                   openclose = "close"
+    }
+    if (openclose == "close"){
+        if (topbottomlid == "top")      ry = ry - 1
+        if (ry == 0)                    topbottomlid = "bottom"
+        if (topbottomlid == "bottom")   ry = ry + 1
+        if (ry == 50)                   openclose = "open"
+    }
+    
+    requestAnimationFrame(draw)
+}
+
+</script>
